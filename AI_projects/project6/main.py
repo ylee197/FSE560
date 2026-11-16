@@ -4,9 +4,9 @@ import PyPDF2
 import io
 import os
 from openai import OpenAI
-from dotenv import load_dotenv
 
-load_dotenv()
+token = os.environ["CREATEAI_SERVICE_TOKEN"]
+base_url = "https://api-main.aiml.asu.edu/v1"
 
 def extract_text_from_pdf(pdf_file):
     pdf_reader = PyPDF2.PdfReader(pdf_file)
@@ -53,9 +53,12 @@ def main():
             
             Please provide your analysis in a clear, structured format with specific recommendations."""
             
-            #client = OpenAI(api_key=OPENAI_API_KEY)
+            client = OpenAI(
+                api_key=token,
+                base_url=base_url,
+            )
             response = client.chat.completions.create(
-                model="gpt-4o-mini",
+                model="openai/gpt4o",
                 messages=[
                     {"role": "system", "content": "You are an expert resume reviewer with years of experience in HR and recruitment."},
                     {"role": "user", "content": prompt}

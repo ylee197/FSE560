@@ -1,46 +1,37 @@
-#uv add langgraph langchain python-dotenv langchain-openai
-from langchain_core.messages import HumanMessage
-from langchain_openai import ChatOpenAI
-from langchain.tools import tool
-from langgraph.prebuilt import create_react_agent
-from dotenv import load_dotenv
+import os
+from openai import OpenAI
 
-load_dotenv()
+token = os.environ["CREATEAI_SERVICE_TOKEN"]
+base_url = "https://api-main.aiml.asu.edu/v1"
 
-@tool
-def calculator(a: float, b: float) -> str:
-    """Useful for performing basic arithmeric calculations with numbers"""
-    print("Tool has been called.")
-    return f"The sum of {a} and {b} is {a + b}"
-    
-@tool
-def say_hello(name: str) -> str:
-    """Useful for greeting a user"""
-    print("Tool has been called.")
-    return f"Hello {name}, I hope you are well today"
+client = OpenAI(
+    api_key=token,
+    base_url=base_url,
+)
 
-def main():
-    model = ChatOpenAI(temperature=0)
-    
-    tools = [calculator, say_hello]
-    agent_executor = create_react_agent(model, tools)
-    
-    print("Welcome! I'm your AI assistant. Type 'quit' to exit.")
-    print("You can ask me to perform calculations or chat with me.")
-    
-    while True:
-        user_input = input("\nYou: ").strip()
-        
-        if user_input == "quit":
-            break
-        
-        print("\nAssistant: ", end="")
-        for chunk in agent_executor.stream({"messages": [HumanMessage(content=user_input)]}):
-            if "agent" in chunk and "messages" in chunk["agent"]:
-                for message in chunk["agent"]["messages"]:
-                    print(message.content, end="")
-        print()
-        
-if __name__ == "__main__":
-    main()
-                
+messages = [
+    {"role": "system", "content": "You are a helpful assistant."}
+]
+
+print("Chatbot started. Type 'exit' to quit.")
+
+while True:
+    user_text = input("\nYou: ").strip()
+
+    if user_text.lower() in {"exit", "quit"}:
+        break
+
+    if not user_text:
+        continue
+
+    messages.append({"role": "user", "content": user_text})
+
+    response = client.chat.completions.create(
+        model="openai/gpt4o",
+        messages=messages,
+    )
+
+    answer = response.choices[0].message.content
+    print("Bot:", answer)
+
+    messages.append({"role": "assistant", "content": answer})
