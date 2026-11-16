@@ -1,10 +1,10 @@
 pandas @ file:///Users/ec2-user/croot/pandas_1773246071761/work
-streamlit==1.67.0
+streamlit
 numpy @ file:///Users/ec2-user/croot/numpy_and_numpy_base_1770732576999/work/dist/numpy-2.4.2-cp311-cp311-macosx_12_0_arm64.whl
-keras==3.14.0
-matplotlib==3.11.1
+keras
+matplotlib
 matplotlib-inline @ file:///Users/ec2-user/croot/matplotlib-inline_1784795156240/work
-yfinance==1.3.0
-tensorflow==2.21.0
+yfinance
+tensorflow
 ipython @ file:///Users/ec2-user/croot/ipython_1784576700336/work
-scikit-learn==1.9.0
+scikit-learn
