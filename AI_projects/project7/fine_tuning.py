@@ -4,7 +4,13 @@ import datetime as dt
 from datetime import date, timedelta
 import numpy as np
 import tensorflow as tf
+from pathlib import Path
 from sklearn.preprocessing import MinMaxScaler
+
+base_dir = Path(__file__).resolve().parent
+#model_path = base_dir.parent / "models" / "my_model.pkl"
+model_path = base_dir.parent / "AI_projects" / "project7" / "model.keras"
+print(model_path)
 
 def LSTM_Model(df, roll_out_days):
     scaler = MinMaxScaler(feature_range=(0,1))
@@ -22,7 +28,8 @@ def LSTM_Model(df, roll_out_days):
     trainX, trainY = np.array(trainX), np.array(trainY)
 
     #base_model = keras.models.load_model('model.keras')
-    base_model = keras.models.load_model('/workspaces/FSE560/AI_projects/project7/model.keras')
+    #base_model = keras.models.load_model('/workspaces/FSE560/AI_projects/project7/model.keras')
+    base_model = keras.models.load_model(model_path)
 
     #1.Freeze all layers and fine-tune with a tiny learning rate
     for layer in base_model.layers[:-1]:
