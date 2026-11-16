@@ -1,7 +1,7 @@
 keras
 matplotlib
-matplotlib-inline @ file:///Users/ec2-user/croot/matplotlib-inline_1784795156240/work
+matplotlib-inline 
 yfinance
 tensorflow
-ipython @ file:///Users/ec2-user/croot/ipython_1784576700336/work
+ipython 
 scikit-learn
