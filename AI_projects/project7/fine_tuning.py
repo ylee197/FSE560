@@ -9,7 +9,7 @@ from sklearn.preprocessing import MinMaxScaler
 
 base_dir = Path(__file__).resolve().parent
 #model_path = base_dir.parent / "models" / "my_model.pkl"
-model_path = base_dir.parent / "AI_projects" / "project7" / "model.keras"
+model_path = base_dir.parent / "project7" / "model.keras"
 print(model_path)
 
 def LSTM_Model(df, roll_out_days):
