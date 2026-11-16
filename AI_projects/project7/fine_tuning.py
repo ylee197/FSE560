@@ -7,8 +7,8 @@ import tensorflow as tf
 from pathlib import Path
 from sklearn.preprocessing import MinMaxScaler
 
+# This is for streamlit run
 base_dir = Path(__file__).resolve().parent
-#model_path = base_dir.parent / "models" / "my_model.pkl"
 model_path = base_dir.parent / "project7" / "model.keras"
 print(model_path)
 
@@ -28,7 +28,6 @@ def LSTM_Model(df, roll_out_days):
     trainX, trainY = np.array(trainX), np.array(trainY)
 
     #base_model = keras.models.load_model('model.keras')
-    #base_model = keras.models.load_model('/workspaces/FSE560/AI_projects/project7/model.keras')
     base_model = keras.models.load_model(model_path)
 
     #1.Freeze all layers and fine-tune with a tiny learning rate
