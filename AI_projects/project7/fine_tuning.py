@@ -21,7 +21,8 @@ def LSTM_Model(df, roll_out_days):
         trainY.append(train[i,0])
     trainX, trainY = np.array(trainX), np.array(trainY)
 
-    base_model = keras.models.load_model('model.keras')
+    #base_model = keras.models.load_model('model.keras')
+    base_model = keras.models.load_model('/workspaces/FSE560/AI_projects/project7/model.keras')
 
     #1.Freeze all layers and fine-tune with a tiny learning rate
     for layer in base_model.layers[:-1]:
